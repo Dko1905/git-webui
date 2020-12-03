@@ -1,7 +1,50 @@
 <html>
+<head>
+	<title>Git dir UI</title>
+	<style>
+	table {
+		width: 100%;
+	}
+	table, tr, td {
+		border: solid thin black;
+	}
+	button {
+		color: white;
+		background-color: lightgreen;
+	}
+	#copytest {
+		display: hidden;
+	}
+	</style>
+	<script>
+		function clone(clone_url){
+			const copytext = document.getElementById('copytest')
+			copytext.value = clone_url
+
+			copytext.select()
+			copytext.setSelectionRange(0, 99999)
+
+			document.execCommand('copy')
+		}
+	</script>
+</head>
 <body>
-	{{#price}}
-		<p>{{ title }} spends {{ calc }}$ in Burger King</p>
-	{{/price}}
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Clone url</th>
+			<th>Git clone shortcut</th>
+		</tr>
+		{{#files}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{clone_url}}</td>
+			<td>
+				<button type="button" onclick="clone('{{clone_url}}')">Clone</button>
+			</td>
+		</tr>
+		{{/files}}
+	</table>
+	<input type="text" id="copytest" value=""/>
 </body>
 </html>
