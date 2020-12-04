@@ -19,8 +19,16 @@
 	}
 	</style>
 	<script>
+		let timeoutId = 0
+
 		function clone(clone_url){
-			const copytext = document.getElementById('copytest')
+			const copytext = document.getElementById('copytext')
+			const logtext = document.getElementById('logtext')
+			logtext.innerText = ""
+			if(timeoutId != 0){
+				clearTimeout(timeoutId)
+			}
+
 			copytext.type = "text"
 			copytext.value = clone_url
 
@@ -29,6 +37,14 @@
 
 			document.execCommand('copy')
 			copytext.type = "hidden"
+
+			logtext.innerText = `Copied ${copytext.value}`
+			timeoutId = setTimeout(function(){
+				logtext.innerText = ""
+				if(timeoutId != 0){
+					clearTimeout(timeoutId)
+				}
+			}, 2000)
 		}
 	</script>
 </head>
@@ -42,13 +58,14 @@
 		{{#files}}
 		<tr>
 			<td>{{name}}</td>
-			<td>{{clone_url}}</td>
+			<td>{{clone_ssh_url}}</td>
 			<td>
-				<button type="button" onclick="clone('{{clone_url}}')">Clone</button>
+				<button type="button" onclick="clone('{{clone_ssh_url}}')">Clone</button>
 			</td>
 		</tr>
 		{{/files}}
 	</table>
-	<input type="hidden" id="copytest" value=""/>
+	<p id="logtext"></p>
+	<input type="hidden" id="copytext" value=""/>
 </body>
 </html>
