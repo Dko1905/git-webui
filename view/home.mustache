@@ -19,9 +19,36 @@
 		color: white;
 		background-color: red;
 	}
+	.https {
+		display: none;
+	}
 	</style>
 	<script>
+		let clone_type = 'ssh'
 		let timeoutId = 0
+
+		function toggle(){
+			const https = document.getElementsByClassName('https')
+			const ssh = document.getElementsByClassName('ssh')
+
+			if(clone_type == 'ssh'){
+				clone_type = 'https'
+				for(elm of https){
+					elm.style.display = 'inherit'
+				}
+				for(elm of ssh){
+					elm.style.display = 'none'
+				}
+			} else{
+				clone_type = 'ssh'
+				for(elm of https){
+					elm.style.display = 'none'
+				}
+				for(elm of ssh){
+					elm.style.display = 'inherit'
+				}
+			}
+		}
 
 		function clone(clone_url){
 			const copytext = document.getElementById('copytext')
@@ -48,9 +75,11 @@
 				}
 			}, 2000)
 		}
+
 	</script>
 </head>
 <body>
+	<button type="button" style="margin: 5px;" onclick="toggle()">Toggle ssh/https</button>
 	<table>
 		<tr>
 			<th>Name</th>
@@ -60,9 +89,10 @@
 		{{#files}}
 		<tr>
 			<td>{{name}}</td>
-			<td>{{clone_ssh_url}}</td>
+			<td><p class="ssh">{{clone_ssh_url}}</p><p class="https">{{clone_https_url}}</p></td>
 			<td>
-				<button type="button" onclick="clone('{{clone_ssh_url}}')">Clone</button>
+				<button class="ssh" type="button" onclick="clone('{{clone_ssh_url}}')">Clone</button>
+				<button class="https" type="button" onclick="clone('{{clone_https_url}}')">Clone</button>
 			</td>
 		</tr>
 		{{/files}}
