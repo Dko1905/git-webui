@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Git dir UI</title>
+	<title>Git</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<style>
-	table {
-		
-	}
 	table, tr, td {
 		border: solid thin black;
 		padding: 10px;
@@ -19,12 +16,9 @@
 		color: white;
 		background-color: red;
 	}
-	.https {
-		display: none;
-	}
 	</style>
 	<script>
-		let clone_type = 'ssh'
+		let clone_type = 'https'
 		let timeoutId = 0
 
 		function toggle(){
@@ -78,7 +72,7 @@
 
 	</script>
 </head>
-<body>
+<body onload="toggle()">
 	<button type="button" style="margin: 5px;" onclick="toggle()">Toggle ssh/https</button>
 	<table>
 		<tr>
