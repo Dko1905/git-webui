@@ -7,8 +7,8 @@ const { render } = require('mustache')
 
 // Constants
 const PORT = process.env.PORT || 8080
-const GIT_DIR = '.'
-const CLONE_SSH_PREFIX = 'git clone \"ssh://git@190405.xyz:22000/~/'
+const GIT_DIR = process.env.GIT_DIR || '.'
+const CLONE_SSH_PREFIX = process.env.CLONE_SSH_PREFIX || 'git clone \"ssh://git@190405.xyz:22000/~/'
 // Semi-Constants
 const home_template = readFile('./view/home.mustache', { encoding: 'utf-8' })
 
@@ -21,12 +21,15 @@ const home_handle = async (req, res) => {
 		}
 		const dir = await readdir(GIT_DIR)
 		dir.forEach((file) => {
-			view.files.push({
-				name: file, clone_ssh_url: `${CLONE_SSH_PREFIX}${file}"`
-			})
+			if(file[0] != '.'){
+				view.files.push({
+					name: file, clone_ssh_url: `${CLONE_SSH_PREFIX}${file}"`
+				})
+			}
 		})
 		const rendered = render(await home_template, view)
 
+		res.setHeader("Content-Type", "text/html; charset=UTF-8");
 		res.writeHead(200)
 
 		const time = Date.now() - start
