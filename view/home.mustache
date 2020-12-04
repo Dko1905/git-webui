@@ -3,28 +3,32 @@
 	<title>Git dir UI</title>
 	<style>
 	table {
-		width: 100%;
+		
 	}
 	table, tr, td {
 		border: solid thin black;
+		padding: 10px;
 	}
 	button {
 		color: white;
-		background-color: lightgreen;
+		background-color: green;
 	}
-	#copytest {
-		display: hidden;
+	button:active {
+		color: white;
+		background-color: red;
 	}
 	</style>
 	<script>
 		function clone(clone_url){
 			const copytext = document.getElementById('copytest')
+			copytext.type = "text"
 			copytext.value = clone_url
 
 			copytext.select()
 			copytext.setSelectionRange(0, 99999)
 
 			document.execCommand('copy')
+			copytext.type = "hidden"
 		}
 	</script>
 </head>
@@ -45,6 +49,6 @@
 		</tr>
 		{{/files}}
 	</table>
-	<input type="text" id="copytest" value=""/>
+	<input type="hidden" id="copytest" value=""/>
 </body>
 </html>

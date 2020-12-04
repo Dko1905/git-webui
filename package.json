@@ -1,0 +1,11 @@
+{
+  "name": "git-webui",
+  "version": "1.0.0",
+  "main": "ui.js",
+  "repository": "https://github.com/Dko1905/git-webui.git",
+  "author": "Daniel Florescu <Daniel.florescu1905@protonmail.ch>",
+  "license": "MIT",
+  "dependencies": {
+    "mustache": "^4.0.1"
+  }
+}
