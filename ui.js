@@ -9,7 +9,7 @@ const { render } = require('mustache')
 const PORT = process.env.PORT || 8080
 const GIT_DIR = process.env.GIT_DIR || '.'
 const CLONE_SSH_PREFIX = process.env.CLONE_SSH_PREFIX || 'git clone \"ssh://git@190405.xyz:22000/~/'
-const CLONE_HTTPS_PREFIX = process.env.CLONE_HTTPS_PREFIX || 'git clone \"https://git.190405.xyz/'
+const CLONE_HTTPS_PREFIX = process.env.CLONE_HTTPS_PREFIX || 'git clone \"https://www.git.190405.xyz/'
 // Semi-Constants
 const home_template = readFile('./view/home.mustache', { encoding: 'utf-8' })
 
